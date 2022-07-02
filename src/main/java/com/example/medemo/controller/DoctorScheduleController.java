@@ -21,7 +21,7 @@ public class DoctorScheduleController {
     private DoctorScheduleService doctorScheduleService;
 
     @GetMapping(value="/doctorSchedule")
-    List<DoctorSchedule> getAll(){
+    List<DoctorScheduleDto> getAll(){
         return doctorScheduleService.getAllDoctorSchedules();
     }
 

@@ -1,6 +1,11 @@
 package com.example.medemo.service;
 
+import com.example.medemo.dto.PatientDto;
+import com.example.medemo.dto.PregnancyDto;
+import com.example.medemo.mapper.PatientMapper;
+import com.example.medemo.mapper.PregnancyMapper;
 import com.example.medemo.model.Patient;
+import com.example.medemo.model.Pregnancy;
 import com.example.medemo.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,8 +19,13 @@ public class PatientService {
     @Autowired
     private PatientRepository patientRepository;
 
-    public List<Patient> getAllPatients() {
-        return patientRepository.findAll();
+    public List<PatientDto> getAllPatients() {
+        List<Patient> list = patientRepository.findAll();
+        List<PatientDto> listDto = null;
+        for(Patient patient : list ){
+            listDto.add(PatientMapper.EntityToDto(patient));
+        }
+        return listDto;
     }
 
     public Optional<Patient> findById(long id) {

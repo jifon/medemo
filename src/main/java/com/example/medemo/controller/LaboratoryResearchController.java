@@ -21,7 +21,7 @@ public class LaboratoryResearchController {
     private LaboratoryResearchService laboratoryResearchService;
 
     @GetMapping(value="/laboratoryResearch")
-    List<LaboratoryResearch> getAll(){
+    List<LaboratoryResearchDto> getAll(){
         return laboratoryResearchService.getAllLaboratoryResearches();
     }
 

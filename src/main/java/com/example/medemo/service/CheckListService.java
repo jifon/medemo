@@ -1,8 +1,8 @@
 package com.example.medemo.service;
 
+import com.example.medemo.dto.CheckListDto;
+import com.example.medemo.mapper.CheckListMapper;
 import com.example.medemo.model.CheckList;
-import com.example.medemo.model.Question;
-import com.example.medemo.model.Text;
 import com.example.medemo.repository.CheckListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,21 +16,34 @@ public class CheckListService {
     @Autowired
     private CheckListRepository repository;
 
-    public List<CheckList> getAllCheckLists() {
-        return repository.findAll();
+
+    public List<CheckListDto> getAllCheckLists() {
+        List<CheckList> list = repository.findAll();
+        List<CheckListDto> listDto = null;
+        for(CheckList checkList : list ){
+            listDto.add(CheckListMapper.EntityToDto(checkList));
+        }
+        return listDto;
     }
 
-    public Optional<CheckList> findById(long id) {
-        return repository.findById(id);
+
+    public Optional<CheckListDto> findById(long id) {
+
+        Optional<CheckList> text = repository.findById(id);
+        return Optional.of(CheckListMapper.EntityToDto(text.get()));
     }
 
-    public CheckList save(CheckList checkList) {
-        return repository.save(checkList);
+
+
+    public CheckListDto save(CheckListDto text) {
+        return CheckListMapper.EntityToDto(repository.save(CheckListMapper.DtoToEntity(text)));
     }
 
     public void delete(long id) {
         repository.deleteById(id);
     }
+
+
 
 
 }

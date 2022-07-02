@@ -21,7 +21,7 @@ public class QuestionController {
     private QuestionService questionService;
 
     @GetMapping(value="/question")
-    List<Question> getAll(){
+    List<QuestionDto> getAll(){
         return questionService.getAllQuestion();
     }
 

@@ -22,7 +22,7 @@ public class PregnancyController {
     private PregnancyService pregnancyService;
 
     @GetMapping(value="/pregnancy")
-    List<Pregnancy> getAll(){
+    List<PregnancyDto> getAll(){
         return pregnancyService.getAllPregnancies();
     }
 
